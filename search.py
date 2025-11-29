@@ -3,7 +3,7 @@ from selenium import webdriver
 import time
 from bs4 import BeautifulSoup
 
-
+# chooses which URL to use based on user choice
 def search(isbn, website):
     if(website == "amazon"):
         base_url = "https://www.amazon.com/s?k="
@@ -15,7 +15,7 @@ def search(isbn, website):
 
     return search_url
 
-
+# chooses what to parse from the HTML based on user chosen website
 def parsed(soup, website):
     if(website == "amazon"):
         text = soup.find('h2', class_ ="a-size-base a-spacing-small a-spacing-top-small a-text-normal")
@@ -26,7 +26,7 @@ def parsed(soup, website):
     return text
 
 
-
+# uses selenium to open the website, refresh to get past any bot detection, and edit the excel sheet based on 
 def look_up(file_path, website):
     website = website.lower()
     y = 1
@@ -49,4 +49,5 @@ def look_up(file_path, website):
 
         wb.save("book.xlsx")
         y += 1
+
         driver.quit()
