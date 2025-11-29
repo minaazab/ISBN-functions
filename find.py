@@ -2,9 +2,10 @@ from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
 import os
 
+# creating highlight
 yellow = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
 
-
+# itterates through cells until a match is found between the specific ISBN and the values in sheet two
 def finds(cell, sheet_num):
     for col in sheet_num.iter_cols(min_col=1, max_col=4):
         for num in col:
@@ -12,7 +13,7 @@ def finds(cell, sheet_num):
                 return True
     return False
 
-
+# calls finds() using each ISBN in sheet one
 def process_find(file_path):
     wb = load_workbook(file_path)
     sheet = wb['Sheet1']
@@ -27,5 +28,7 @@ def process_find(file_path):
     wb.save(file_path)
     return file_path
 
+# Opens the file that was being worked on to see changes
 def open_sesame(file_path):
     os.startfile(file_path)
+
